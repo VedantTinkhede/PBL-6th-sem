@@ -1,0 +1,188 @@
+/* 1. Reset CSS (Normalize) */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+/* 2. Base Styles */
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #333;
+}
+
+/* 3. Global Link Styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 4. Button Styles */
+button {
+  background-color: #ff7f50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff6347;
+}
+
+button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* 5. Flexbox Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* 6. Form Inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #ff7f50;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+/* 7. Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pb-20 {
+  padding-bottom: 20px;
+}
+
+.bg-light {
+  background-color: #fff;
+}
+
+.bg-dark {
+  background-color: #333;
+  color: white;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+/* 8. Responsiveness */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-button {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}

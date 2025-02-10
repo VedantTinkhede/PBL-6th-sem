@@ -1,47 +1,30 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext'; // Importing the Auth Context
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const { login } = useAuth(); // Get login function from AuthContext
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     setError('');
 
-    // Retrieve registered users from localStorage
-    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-
-    // Check if the entered credentials match any stored data
-    const user = registeredUsers.find(
-      (user) => user.email === formData.email && user.password === formData.password
-    );
+    try {
+      await login(email, password); // Firebase login
+      navigate('/home'); // Redirect to home on successful login
+    } catch (error) {
+      setError('Invalid email or password.');
+    }
 
     setLoading(false);
-
-    if (user) {
-      // Successful login, redirect user
-      alert('Login Successful!');
-      navigate('/home'); // Redirect to home page (or dashboard)
-    } else {
-      setError('Invalid email or password');
-    }
   };
 
   return (
@@ -51,31 +34,23 @@ function Login() {
         <div className="form-group">
           <input
             type="email"
-            name="email"
             placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div className="form-group">
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
 
         {error && <div className="error-message">{error}</div>}
-
-        <div className="remember-me">
-          <label>
-            <input type="checkbox" /> Remember Me
-          </label>
-        </div>
 
         <button type="submit" className="cta-button" disabled={loading}>
           {loading ? 'Logging In...' : 'Login'}
